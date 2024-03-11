@@ -3,43 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeatherNow</title>
+    <title>WeatherNowApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body{
-            margin: auto;
+            background-color: #282a36;
+            margin: 0; /* Remove default body margin */
+            font-family: "Space Grotesk", sans-serif;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+        input{
+            margin-top: 1rem;
+        }
+        h1{
+            color: #f8f8f2;
+            font-family: "Honk", system-ui;
+            font-size: 3rem;
+        }
+        .forecast{
+            color: ivory;
+        }
+        footer{
+            position: fixed;
+            bottom: 0;
+            margin: 0; /* Remove default footer margin */
+            width: 100%;
+            background: #282a36; /* Match body background color */
+            color: white;
         }
     </style>
 </head>
-<body class="container ">
-    <div class="text-center">
+<body class="container">
+    <div class="text-center" style="margin-top: 2rem;">
         <form action="/" method="post" class="form-group">
-            <h1 class="jumbotron">Weather App</h1>
+            <img src="https://static.vecteezy.com/system/resources/previews/020/717/003/original/3d-minimal-weather-forecast-concept-partly-cloudy-and-windy-in-the-morning-weather-icon-3d-illustration-png.png" style="width: 10rem;">
+            <h1 class="jumbotron"><b>WeatherNowApp</b></h1>
             <div class="row">
-                <div class="col-md-4"><input name="cityName" class="form-control" id="cityName" value="Hammond" placeholder="City Name (Hammond)"/></div>
-                <div class="col-md-4"><input name="stateName" class="form-control" id="stateName" value="IN"  placeholder="State Code (IN for Indiana)"/></div>
-                <div class="col-md-4"><input name="countryName" class="form-control" id="countryName" value="US" placeholder="Country Code (US for USA)"/></div>
+                <div class="col-md-4"><input name="cityName" class="form-control" id="cityName"  placeholder="City Name (Chicago)" required/></div>
+                <div class="col-md-4"><input name="stateName" class="form-control" id="stateName"  placeholder="State Code (IL for Illinois)" required/></div>
+                <div class="col-md-4"><input name="countryName" class="form-control" id="countryName" placeholder="Country Code (US for USA)" required/></div>
             </div>
             <br><br>
             <button class="btn btn-outline-success">Get Data</button>
         </form>
 
         <div id="openweathermap-widget-11"></div>
-<script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
-<script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 11,cityid: '4921100',appid: 'f70ac06d9bba72066ea7ea3851b36f0b',units: 'metric',containerid: 'openweathermap-widget-11',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
-        <div class="row">
+
+        <div class="row forecast">
+            <div class="col-md-4">
+            </div>
             <div class="col-md-4">
                 {% if data%}
-        <img src="https://openweathermap.org/img/wn/{{data.icon}}@2x.png" alt="icon">
-        <h3>Current Forecast is {{data.desc}}</h3>
-        <h5>Feels Like: {{data.feels}}</h5>
-        <h5>Current Temperature: {{data.temp}}</h5>
-        {%endif%}
+                    <img src="https://openweathermap.org/img/wn/{{data.icon}}@2x.png" alt="icon">
+                    <h3>Current Forecast is {{data.desc}}</h3>
+                    <h5>Current Temperature: {{data.temp}}°C</h5>
+                    <h5>Feels Like: {{data.feels}}°C</h5>
+                {%endif%}
             </div>
             <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
         </div>
-    </div> 
+    </div>
+    <footer class="text-center">
+        <p>Copyright &copy; TwentyTwentyFour, WeatherNowAPP.</p>
+        <p>All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
